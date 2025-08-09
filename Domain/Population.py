@@ -3,22 +3,23 @@ from collections import deque
 from Domain.World import World
 
 class Population:
-    cells = {}
-
     def __init__(self, initial_cell_values = None, previous_generation = None):
         if initial_cell_values:
-            self.create_initial_generation(initial_cell_values)
+            self.cells = self.create_initial_generation(initial_cell_values)
         elif previous_generation:
-            self.calculate_next_generation(previous_generation)
+            self.cells = self.calculate_next_generation(previous_generation)
         
     def create_initial_generation(self, cell_values):
         self.validate_cell_input(cell_values)
         
         incomingCellValues = deque(cell_values)
+        arranged_cell_values = {}
 
         for y in range(0, World.height):
             for x in range(0, World.width):
-                self.cells[(x,y)] = incomingCellValues.popleft()
+                arranged_cell_values[(x,y)] = incomingCellValues.popleft()
+        
+        return arranged_cell_values
                 
     def calculate_next_generation(self, previousGeneration):
         print("Lasketaan seuraavan sukupolven elinmahdollisuudet")

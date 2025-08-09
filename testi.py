@@ -1,5 +1,6 @@
 from Domain.Population import Population
 from Domain.World import World
+from Engine.Setupper import read_setup_from_json
 
 World.set_width(4)
 World.set_height(3)
@@ -10,4 +11,8 @@ population = Population(initial_cell_values=test_cells)
 population.print_out()
 
 population2 = Population(previous_generation='jaa')
+
+setup_data = read_setup_from_json()
+
+print("---", setup_data["worldHeight"])
 
