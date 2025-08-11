@@ -22,12 +22,23 @@ class Population:
         return arranged_cell_values
                 
     def calculate_next_generation(self, previous_generation):
+        next_generation_cell_values = {}
+
         for y in range(0, World.height):
             for x in range(0, World.width):
-                is_alive_in_next_generation((x,y), previous_generation.cells)
+                if is_alive_in_next_generation((x,y), previous_generation.cells):
+                    next_generation_cell_values[(x,y)] = 1
+                else:
+                    next_generation_cell_values[(x,y)] = 0
+
+        return next_generation_cell_values
 
     def print_out(self):
         for y in range(0, World.height):
             for x in range(0, World.width):
-                print(self.cells[(x,y)], end = " ")
+                if self.cells[(x,y)]:
+                    print("*", end = "")
+                else:
+                    print("-", end = "")
             print()
+        print()

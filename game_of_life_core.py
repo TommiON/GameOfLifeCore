@@ -18,8 +18,12 @@ def setup():
     generation_one = Population(initial_cell_values = world_config["initialCells"])
     generations.append(generation_one)
 
+    generation_one.print_out()
+
 def run():
     generation_two = Population(previous_generation = generations[0])
+
+    generation_two.print_out()
 
 if __name__ == "__main__":
     main()
