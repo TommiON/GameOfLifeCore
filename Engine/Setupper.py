@@ -15,10 +15,10 @@ def validate_input(setup_json_data):
     cells = setup_json_data["initialCells"]
 
     if len(cells) > (width * height):
-        raise ValueError("Syötteessä liikaa arvoja")
+        raise ValueError("Syötteessä liikaa soluja")
     elif len(cells) < (width * height):
-        raise ValueError("Syötteessä liian vähän arvoja")
+        raise ValueError("Syötteessä liian vähän soluja")
     else:
         for value in cells:
             if value not in [0, 1, "0", "1", True, False]:
-                raise ValueError("Syötteessä saa olla vain totuusarvoja")
+                raise ValueError("Syötteen soluissa saa olla vain totuusarvoja")

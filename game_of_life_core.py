@@ -8,7 +8,10 @@ def main():
     start()
 
 def start():
-    world_config = read_setup_from_json()
+    try:
+        world_config = read_setup_from_json()
+    except ValueError as error:
+        print("VIRHE!", error)
 
     World.set_width(world_config["worldWidth"])
     World.set_height(world_config["worldHeight"])
