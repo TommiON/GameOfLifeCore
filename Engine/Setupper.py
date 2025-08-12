@@ -1,8 +1,8 @@
 import json
 
-def read_setup_from_json():
+def read_setup_from_json(filename):
     setup_data = None
-    with open('setup.json', 'r', encoding="utf-8") as file:
+    with open(filename, 'r', encoding="utf-8") as file:
         setup_data = json.loads(file.read())
 
     validate_input(setup_data)
