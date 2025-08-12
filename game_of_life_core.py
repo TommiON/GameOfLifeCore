@@ -2,28 +2,38 @@ from Domain.World import World
 from Domain.Population import Population
 from Engine.Setupper import read_setup_from_json
 
-generations = []
+from time import sleep
 
 def main():
-    print("-- Game of Life --")
-    setup()
-    run()
+    start()
 
-def setup():
+def start():
     world_config = read_setup_from_json()
 
     World.set_width(world_config["worldWidth"])
     World.set_height(world_config["worldHeight"])
-
     generation_one = Population(initial_cell_values = world_config["initialCells"])
-    generations.append(generation_one)
 
-    generation_one.print_out()
+    run(generation_one)
 
-def run():
-    generation_two = Population(previous_generation = generations[0])
+def run(initial_generation):
+    current_generation = initial_generation
+    number_of_current_generation = 1
 
-    generation_two.print_out()
+    while True:        
+        if current_generation.census == 0:
+            print("SUKUPUUTTO!")
+            current_generation.print_out()
+            break
+        else:
+            print("Sukupolvi:", number_of_current_generation, "Väkiluku:", current_generation.census)
+            current_generation.print_out()
+        
+        sleep(0.5)
+
+        next_generation = Population(previous_generation = current_generation)
+        current_generation = next_generation
+        number_of_current_generation += 1
 
 if __name__ == "__main__":
     main()
