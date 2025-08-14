@@ -1,7 +1,5 @@
 from collections import deque
 
-from flask import Flask, jsonify, request
-
 from Domain.World import World
 from Domain.LifeGiver import is_alive_in_next_generation
 
@@ -14,6 +12,7 @@ class Population:
             self.calculate_next_generation(previous_generation)
         
     def create_initial_generation(self, cell_values):
+        self.generation = 1
         self.census = 0
         self.cells = {}
 
@@ -27,6 +26,7 @@ class Population:
                     self.census += 1
                         
     def calculate_next_generation(self, previous_generation):
+        self.generation = previous_generation.generation + 1
         self.census = 0
         self.cells = {}
 
@@ -38,6 +38,12 @@ class Population:
                 else:
                     self.cells[(x,y)] = 0
 
+    def get_cell_values(self):
+        cell_values = []
+        for value in self.cells.values():
+            cell_values.append(value)
+        return cell_values
+    
     def print_out(self):
         for y in range(0, World.height):
             for x in range(0, World.width):

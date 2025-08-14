@@ -1,12 +1,12 @@
 from Domain.World import World
 from Domain.Population import Population
-from Engine.Setupper import read_setup_from_json
+from Engine.Setupper import read_setup_from_file
 
 from time import sleep
 
 def run_in_local_mode(config_file_name):
     try:
-        world_config = read_setup_from_json(filename = config_file_name)
+        world_config = read_setup_from_file(filename = config_file_name)
     except ValueError as error:
         print("VIRHE:", error)
     except FileNotFoundError as error:
@@ -16,7 +16,6 @@ def run_in_local_mode(config_file_name):
     World.set_height(world_config["worldHeight"])
 
     current_generation = Population(initial_cell_values = world_config["initialCells"])
-    generation_ordinal = 1
 
     while True:        
         if current_generation.census == 0:
@@ -24,11 +23,10 @@ def run_in_local_mode(config_file_name):
             current_generation.print_out()
             break
         else:
-            print("Sukupolvi:", generation_ordinal, "Väkiluku:", current_generation.census)
+            print("Sukupolvi:", current_generation.generation, "Väkiluku:", current_generation.census)
             current_generation.print_out()
         
         sleep(0.5)
 
         next_generation = Population(previous_generation = current_generation)
         current_generation = next_generation
-        generation_ordinal += 1
