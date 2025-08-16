@@ -1,14 +1,43 @@
 Backend/core for [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). Implements the game logic and offers two modes of interaction:
 
-#### 1. Local
-
-Rudimentary text-based user interface, initial state given in a JSON file.
+## 1. Local
 
 `python3 game_of_life_core.py <setup_file_name>`
 
-Displays generation after generation with half-a-second intervals until extinction or manual termination.
+Rudimentary text-based user interface, initial state given in a JSON file. Displays generation after generation with half-a-second intervals until extinction or manual termination.
 
-#### 2. REST interface for a separate frontend.
+Example of a configuration file:
+
+```
+    "worldHeight": 20,
+    "initialCells": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "worldWidth": 20,
+    "toroidalInX": true,
+    "toroidalInY": true
+```
+
+Width and height dimensions and first generation of cells are required. If `toroidalInX` is `true`, the right/left edges are stiched together, making that dimension infinite. `toroidalInY` is similar in up/down dimension. Both are optional and default to `true`.
+
+### 2. REST interface for a separate frontend
 
 `python3 game_of_life_core.py`
 
