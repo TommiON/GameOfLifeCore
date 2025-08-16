@@ -4,22 +4,34 @@ class Neighborhood:
 
     def __init__(self, x, y):
         if x == 0:
-            left_neighbor_column = None
+            if World.toroidal_in_X_dimension:
+                left_neighbor_column = World.width - 1
+            else:
+                left_neighbor_column = None
         else:
             left_neighbor_column = x - 1
         
         if x == World.width - 1:
-            right_neighbor_column = None
+            if World.toroidal_in_X_dimension:
+                right_neighbor_column = 0
+            else:
+                right_neighbor_column = None
         else:
             right_neighbor_column = x + 1
 
         if y == 0:
-            upper_neighbor_row = None
+            if World.toroidal_in_Y_dimension:
+                upper_neighbor_row = World.height - 1
+            else:
+                upper_neighbor_row = None
         else:
             upper_neighbor_row = y - 1
 
         if y == World.height - 1:
-            lower_neighbor_row = None
+            if World.toroidal_in_Y_dimension:
+                lower_neighbor_row = 0
+            else:
+                lower_neighbor_row = None
         else:
             lower_neighbor_row = y + 1
 

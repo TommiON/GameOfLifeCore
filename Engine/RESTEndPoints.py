@@ -1,6 +1,6 @@
 from Domain.Population import Population
 from Domain.World import World
-from Engine.Setupper import validate_setup_input
+from Engine.Setupper import setup_world
 from Engine.CachedGenerations import CachedGenerations
 from flask import Flask, jsonify, request
 
@@ -16,12 +16,9 @@ def get_status():
 @app.route("/setup", methods = ["POST"])
 def setup():
     try:
-        validate_setup_input(request.json)
+        setup_world(data_from_REST_request = request.json)
 
-        World.set_width(request.json["worldWidth"])
-        World.set_height(request.json["worldHeight"])
-        
-        generation_one = Population(initial_cell_values = request.json["initialCells"])
+        generation_one = Population(initial_cell_values = World.generation_one)
 
         CachedGenerations.store_seed(population = generation_one)
         
